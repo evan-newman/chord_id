@@ -1,4 +1,4 @@
-import { Vex } from "./node_modules/vexflow/entry/vexflow.ts";
+import { Vex } from "./node_modules/vexflow/entry/vexflow.js";
 const { Factory, EasyScore, System } = Vex.Flow;
 
 const vf = new Factory({
