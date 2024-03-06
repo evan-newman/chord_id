@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="./node_modules/vexflow/entry/vexflow.ts"></script> -->
+    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script> -->
+    <script src="../dist/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+    <script type="module" src="play.mjs"></script>
+</head>
+<body>
+    <div class="answer-box">
+        <h1>text goes here</h1>
+    </div>
+    <!-- <canvas class="draw-here"></canvas> -->
+    <div id="output"></div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+    <script>
+        const { Factory, EasyScore, System } = Vex.Flow;
+
+        const vf = new Factory({
+        renderer: { elementId: 'output', width: 500, height: 200 },
+        });
+
+        const score = vf.EasyScore();
+        const system = vf.System();
+
+        system
+        .addStave({
+            voices: [
+            score.voice(score.notes('C#5/q, B4, A4, G#4', { stem: 'up' })),
+            score.voice(score.notes('C#4/h, C#4', { stem: 'down' })),
+            ],
+        })
+        .addClef('treble')
+        .addTimeSignature('4/4');
+
+        vf.draw();
+    </script> -->
+</body>
+</html>

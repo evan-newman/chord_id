@@ -1,0 +1,25 @@
+.intro-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.intro-button {
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+}
+
+.intro-button:hover {
+    cursor: pointer;
+}
