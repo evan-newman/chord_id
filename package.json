@@ -1,0 +1,27 @@
+{
+  "name": "chord_id",
+  "version": "1.0.0",
+  "description": "fun game to guess chord names",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evan-newman/chord_id.git"
+  },
+  "keywords": [
+    "music",
+    "fun",
+    "game"
+  ],
+  "author": "Evan Newman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/evan-newman/chord_id/issues"
+  },
+  "homepage": "https://github.com/evan-newman/chord_id#readme",
+  "dependencies": {
+    "vexflow": "^4.2.3"
+  }
+}

@@ -1,9 +1,5 @@
-// import { createRequire } from 'module';
-// const require = createRequire(import.meta.url);
-// const { default: Vex } = require("vexflow");
-
-import vex from "vexflow"
-const { Factory, EasyScore, System } = vex.Flow;
+import { Vex } from "vexflow";
+const { Factory, EasyScore, System } = Vex.Flow;
 
 const vf = new Factory({
   renderer: { elementId: 'output', width: 500, height: 200 },
