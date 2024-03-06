@@ -1,4 +1,4 @@
-import { Vex } from "vexflow";
+import { Vex } from "./node_modules/vexflow";
 
 document.getElementById('start-button').onclick = function () {
     window.location.href = 'https://evan-newman.github.io/chord_id/play.html'
