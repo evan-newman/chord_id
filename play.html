@@ -7,44 +7,18 @@
     <title>Document</title>
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="play.css">
+    <script src="play.js" defer></script>
 </head>
 <body>
     <div class="play-page">
         <div class="answer-box">
-            <h1>text goes here</h1>
+            <form action="#">
+                <input id='text-box' type="text" onkeypress="handle(event)">
+            </form>
         </div>
         <div id="output"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
-    <script>
-        const { Factory, EasyScore, System } = Vex.Flow;
-
-        const vf = new Factory({
-            renderer: { elementId: 'output', width: 225, height: 200 },
-        });
-
-        const score = vf.EasyScore();
-        const system = vf.System();
-
-        const notes = ['E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4', 'A4', 'B4', 'C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B5'];
-        let pickRoot = Math.floor(Math.random() * (notes.length - 4));
-        let constructChord = new String("");
-        for (let i = pickRoot; i <= pickRoot + 4; i += 2) {
-            constructChord += notes[i] + " ";
-        }
-        const fullChord = "(" + constructChord + ")/w";
-        console.log(fullChord);
-
-        system
-        .addStave({
-            voices: [
-                score.voice(score.notes(fullChord)),
-            ],
-        })
-        .addClef('treble');
-
-        vf.draw();
-    </script>
 </body>
 </html>
