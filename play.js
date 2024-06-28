@@ -9,10 +9,11 @@ const {
 const div = document.getElementById("output");
 const renderer = new Renderer(div, Renderer.Backends.SVG);
 
-renderer.resize(225, 200);
+renderer.resize(500, 260);
 const context = renderer.getContext();
+context.setViewBox(45, 10, 110, 110);
 
-const stave = new Stave(10, 40, 200);
+const stave = new Stave(0, 0, 200);
 stave.addClef("treble");
 
 stave.setContext(context).draw();
@@ -59,6 +60,10 @@ input.focus();
 input.select();
 
 document.addEventListener("keydown", function() {
+  input.focus();
+});
+
+document.addEventListener("click", function() {
   input.focus();
 });
 
