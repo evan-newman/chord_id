@@ -14,10 +14,6 @@ renderer.resize(500, 260);
 const context = renderer.getContext();
 context.setViewBox(45, 10, 110, 110);
 
-const stave = new Stave(0, 0, 200);
-stave.addClef("treble").addKeySignature('C');
-
-stave.setContext(context).draw();
 
 let group = context.openGroup();
 
@@ -25,18 +21,21 @@ let group = context.openGroup();
 const allKeys = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b']
 const whiteKeys = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 
-const majorTriadChordAlg    = [0, 4, 7];
-const minorTriadChordAlg    = [0, 3, 7];
-const augTriadChordAlg      = [0, 4, 8];
-const dimTriadChordAlg      = [0, 3, 6];
-const dominant7thChordAlg   = majorTriadChordAlg.concat(10);
-const major7thChordAlg      = majorTriadChordAlg.concat(11);
-const minor7thChordAlg      = minorTriadChordAlg.concat(10);
-const halfDim7thChordAlg    = dimTriadChordAlg.concat(10);
-const dim7thChordAlg        = dimTriadChordAlg.concat(9);
-const minorMajor7thChordAlg = minorTriadChordAlg.concat(11);
-const augMajor7thChordAlg   = augTriadChordAlg.concat(11);
-const aug7thChordAlg        = augTriadChordAlg.concat(10);
+const keySignatureSharpAlg = ['f', 'c', 'g', 'd', 'a', 'e', 'b'];
+const keySignatureFlatAlg = ['b', 'e', 'a', 'd', 'g', 'c', 'f'];
+
+const majorTriadChord    = [[0, 4, 7], ''];
+const minorTriadChord    = [[0, 3, 7], 'm'];
+const augTriadChord      = [[0, 4, 8], 'aug'];
+const dimTriadChord      = [[0, 3, 6], 'dim'];
+const dominant7thChord   = [majorTriadChord[0].concat(10), '7'];
+const major7thChord      = [majorTriadChord[0].concat(11), 'M7'];
+const minor7thChord      = [minorTriadChord[0].concat(10), 'm7'];
+const halfDim7thChord    = [dimTriadChord[0].concat(10), 'o/7'];
+const dim7thChord        = [dimTriadChord[0].concat(9), 'o7'];
+const minorMajor7thChord = [minorTriadChord[0].concat(11), 'mM7'];
+const augMajor7thChord   = [augTriadChord[0].concat(11), '+M7'];
+const aug7thChord        = [augTriadChord[0].concat(10), '+7'];
 
 function constructGeneralChord(totalNotes, rootNoteIdx) {
   let generalChord = [];
@@ -69,7 +68,7 @@ function findPitch(rootNote) {
   return pitch;
 }
 
-function constructChord(chordAlg, generalChord, rootNote, pitch) {
+function constructChord(chordAlg, generalChord, rootNote, accidentalAdjuster, pitch) {
   let chord = [];
   let halfSteps = 0;
   let halfStepsIdx = allKeys.findIndex(x => x == rootNote);
@@ -86,7 +85,7 @@ function constructChord(chordAlg, generalChord, rootNote, pitch) {
       }
     }
 
-    let distance = halfSteps - chordHalfSteps;
+    let distance = halfSteps - chordHalfSteps + accidentalAdjuster;
     let note = generalNote;
     while (distance != 0) {
       if (distance < 0) {
@@ -105,16 +104,45 @@ function constructChord(chordAlg, generalChord, rootNote, pitch) {
   return chord;
 }
 
+function adjustmentForAccidentalRoots() {
+  // NOTE: change here for buttons selected in settings instead of hard coded values
+  let allowNaturualRoots = true;
+  let allowSharpRoots = true;
+  let allowFlatRoots = true;
+
+  let rootTypes = []
+  if (allowNaturualRoots) {
+    rootTypes.push(0);
+  }
+  if (allowSharpRoots) {
+    rootTypes.push(-1);
+  }
+  if (allowFlatRoots) {
+    rootTypes.push(1);
+  }
+  let accidentalAdjuster = rootTypes[Math.floor(Math.random() * rootTypes.length)];
+
+  return accidentalAdjuster;
+}
+
 /******************************************/
 
 function drawChord() {
   let rootNoteIdx = Math.floor(Math.random() * whiteKeys.length);
   let rootNote = whiteKeys[rootNoteIdx];
-  let chordAlg = dominant7thChordAlg;
+  let chordInfo = minorMajor7thChord;
+  let chordAlg = chordInfo[0];
   let generalChord = constructGeneralChord(chordAlg.length, rootNoteIdx);
+  let accidentalAdjuster = adjustmentForAccidentalRoots();
   let pitch = findPitch(rootNote);
-  const chord = constructChord(chordAlg, generalChord, rootNote, pitch);
+  const chord = constructChord(chordAlg, generalChord, rootNote, accidentalAdjuster, pitch);
   console.log(chord);
+
+  const stave = new Stave(0, 0, 200);
+  let keySignatureOptions = ['C'];
+  let keySignatureStr = keySignatureOptions[Math.floor(Math.random() * keySignatureOptions.length)];
+  stave.addClef("treble").addKeySignature(keySignatureStr);
+  stave.setContext(context).draw();
 
   let madeStave = new StaveNote({
     keys: chord,
@@ -134,22 +162,23 @@ function drawChord() {
       num_beats: 4,
       beat_value: 4
     }).addTickables(notes),
-  ]
+  ];
 
   new Formatter().joinVoices(voices).format(voices, 300);
 
   notes[0].getTickContext().setX(50);
 
-
   voices.forEach(function(v) {
     v.draw(context, stave);
   });
 
-  return chord[0].split('/')[0];
+  let defaultNote = chord[0].split('/')[0];
+  let answer = defaultNote.charAt(0).toUpperCase() + defaultNote.slice(1) + chordInfo[1];
+  return answer;
 }
 
 /*****************************************/
-let chordRoot = drawChord()
+let answer = drawChord()
 
 const input = document.getElementById('text-box');
 input.focus();
@@ -166,15 +195,15 @@ document.addEventListener("click", function() {
 function handle(e) {
   if(e.keyCode === 13){
     console.log(input.value);
-    console.log(chordRoot)
-    if (input.value.toLowerCase() === chordRoot) {
+    console.log(answer)
+    if (input.value === answer) {
       context.closeGroup();
       context.svg.removeChild(group);
 
       input.value = "";
 
       group = context.openGroup();
-      chordRoot = drawChord()
+      answer = drawChord()
     } else {
       console.log('Wrong!')
     }
