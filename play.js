@@ -10,9 +10,9 @@ const {
 const div = document.getElementById("output");
 const renderer = new Renderer(div, Renderer.Backends.SVG);
 
-renderer.resize(500, 260);
+renderer.resize(500, 300);
 const context = renderer.getContext();
-context.setViewBox(45, 10, 110, 110);
+context.setViewBox(25, -10, 145, 145);
 
 
 let group = context.openGroup();
@@ -24,18 +24,42 @@ const whiteKeys = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 const keySignatureSharpAlg = ['f', 'c', 'g', 'd', 'a', 'e', 'b'];
 const keySignatureFlatAlg = ['b', 'e', 'a', 'd', 'g', 'c', 'f'];
 
-const majorTriadChord    = [[0, 4, 7], ''];
-const minorTriadChord    = [[0, 3, 7], 'm'];
-const augTriadChord      = [[0, 4, 8], 'aug'];
-const dimTriadChord      = [[0, 3, 6], 'dim'];
-const dominant7thChord   = [majorTriadChord[0].concat(10), '7'];
-const major7thChord      = [majorTriadChord[0].concat(11), 'M7'];
-const minor7thChord      = [minorTriadChord[0].concat(10), 'm7'];
-const halfDim7thChord    = [dimTriadChord[0].concat(10), 'o/7'];
-const dim7thChord        = [dimTriadChord[0].concat(9), 'o7'];
-const minorMajor7thChord = [minorTriadChord[0].concat(11), 'mM7'];
-const augMajor7thChord   = [augTriadChord[0].concat(11), '+M7'];
-const aug7thChord        = [augTriadChord[0].concat(10), '+7'];
+const majorTriadChord    = {"halfStepAlgorithm": [0, 4, 7], "name": ''};
+const minorTriadChord    = {"halfStepAlgorithm": [0, 3, 7], "name": 'm'}
+const augTriadChord      = {"halfStepAlgorithm": [0, 4, 8], "name": 'aug'}
+const dimTriadChord      = {"halfStepAlgorithm": [0, 3, 6], "name": 'dim'};
+const dominant7thChord   = {"halfStepAlgorithm": majorTriadChord.halfStepAlgorithm.concat(10), "name": '7'};
+const major7thChord      = {"halfStepAlgorithm": majorTriadChord.halfStepAlgorithm.concat(11), "name": 'M7'};
+const minor7thChord      = {"halfStepAlgorithm": minorTriadChord.halfStepAlgorithm.concat(10), "name": 'm7'};
+const halfDim7thChord    = {"halfStepAlgorithm": dimTriadChord.halfStepAlgorithm.concat(10), "name": 'o/7'};
+const dim7thChord        = {"halfStepAlgorithm": dimTriadChord.halfStepAlgorithm.concat(9), "name": 'o7'};
+const minorMajor7thChord = {"halfStepAlgorithm": minorTriadChord.halfStepAlgorithm.concat(11), "name": 'mM7'};
+const augMajor7thChord   = {"halfStepAlgorithm": augTriadChord.halfStepAlgorithm.concat(11), "name": '+M7'};
+const aug7thChord        = {"halfStepAlgorithm": augTriadChord.halfStepAlgorithm.concat(10), "name": '+7'};
+
+const allChordTypes = [
+                       majorTriadChord, 
+                       minorTriadChord, 
+                       augTriadChord, 
+                       dimTriadChord, 
+                       dominant7thChord, 
+                       major7thChord,
+                       minor7thChord,
+                       halfDim7thChord,
+                       dim7thChord,
+                       minor7thChord,
+                       augMajor7thChord,
+                       aug7thChord
+                      ]
+
+function chordTypesToPick() {
+  let validChordsToPick = [];
+  for (let i = 0; i < allChordTypes.length; i++) {
+    validChordsToPick.push(allChordTypes[i]);
+  }
+
+  return validChordsToPick;
+}
 
 function constructGeneralChord(totalNotes, rootNoteIdx) {
   let generalChord = [];
@@ -107,8 +131,8 @@ function constructChord(chordAlg, generalChord, rootNote, accidentalAdjuster, pi
 function adjustmentForAccidentalRoots() {
   // NOTE: change here for buttons selected in settings instead of hard coded values
   let allowNaturualRoots = true;
-  let allowSharpRoots = true;
-  let allowFlatRoots = true;
+  let allowSharpRoots = false;
+  let allowFlatRoots = false;
 
   let rootTypes = []
   if (allowNaturualRoots) {
@@ -130,8 +154,10 @@ function adjustmentForAccidentalRoots() {
 function drawChord() {
   let rootNoteIdx = Math.floor(Math.random() * whiteKeys.length);
   let rootNote = whiteKeys[rootNoteIdx];
-  let chordInfo = minorMajor7thChord;
-  let chordAlg = chordInfo[0];
+  let listOfChordTypesToPick = chordTypesToPick()
+  let pickedChordIdx = Math.floor(Math.random() * listOfChordTypesToPick.length);
+  let chordInfo = listOfChordTypesToPick[pickedChordIdx]
+  let chordAlg = chordInfo.halfStepAlgorithm;
   let generalChord = constructGeneralChord(chordAlg.length, rootNoteIdx);
   let accidentalAdjuster = adjustmentForAccidentalRoots();
   let pitch = findPitch(rootNote);
@@ -173,7 +199,7 @@ function drawChord() {
   });
 
   let defaultNote = chord[0].split('/')[0];
-  let answer = defaultNote.charAt(0).toUpperCase() + defaultNote.slice(1) + chordInfo[1];
+  let answer = defaultNote.charAt(0).toUpperCase() + defaultNote.slice(1) + chordInfo.name;
   return answer;
 }
 
