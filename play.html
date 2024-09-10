@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" href="play.css">
-    <script src="play.js" defer></script>
-</head>
-<body>
-    <div class="play-page">
-        <div class="answer-box">
-            <form action="#">
-                <input id='text-box' type="text" autocomplete="off" onkeypress="handle(event)">
-            </form>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="shortcut icon" href="#">
+        <link rel="stylesheet" href="play.css">
+        <script src="play.js" defer></script>
+    </head>
+    <body>
+        <button id="home-button">Back</button>
+        <div class="play-page">
+            <div class="answer-box">
+                <form action="#">
+                    <input id='text-box' type="text" autocomplete="off" onkeypress="handle(event)">
+                </form>
+            </div>
+            <div id="output"></div>
         </div>
-        <div id="output"></div>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+    </body>
 </html>
