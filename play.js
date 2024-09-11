@@ -1,7 +1,3 @@
-document.getElementById("home-button").onclick = function () {
-    window.location.href = 'index.html'
-};
-
 const { 
   Renderer, 
   Stave, 
@@ -27,34 +23,6 @@ const whiteKeys = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 
 const keySignatureSharpAlg = ['f', 'c', 'g', 'd', 'a', 'e', 'b'];
 const keySignatureFlatAlg = ['b', 'e', 'a', 'd', 'g', 'c', 'f'];
-
-const majorTriadChord    = {"halfStepAlgorithm": [0, 4, 7], "name": ''};
-const minorTriadChord    = {"halfStepAlgorithm": [0, 3, 7], "name": 'm'}
-const augTriadChord      = {"halfStepAlgorithm": [0, 4, 8], "name": 'aug'}
-const dimTriadChord      = {"halfStepAlgorithm": [0, 3, 6], "name": 'dim'};
-const dominant7thChord   = {"halfStepAlgorithm": majorTriadChord.halfStepAlgorithm.concat(10), "name": '7'};
-const major7thChord      = {"halfStepAlgorithm": majorTriadChord.halfStepAlgorithm.concat(11), "name": 'M7'};
-const minor7thChord      = {"halfStepAlgorithm": minorTriadChord.halfStepAlgorithm.concat(10), "name": 'm7'};
-const halfDim7thChord    = {"halfStepAlgorithm": dimTriadChord.halfStepAlgorithm.concat(10), "name": 'o/7'};
-const dim7thChord        = {"halfStepAlgorithm": dimTriadChord.halfStepAlgorithm.concat(9), "name": 'o7'};
-const minorMajor7thChord = {"halfStepAlgorithm": minorTriadChord.halfStepAlgorithm.concat(11), "name": 'mM7'};
-const augMajor7thChord   = {"halfStepAlgorithm": augTriadChord.halfStepAlgorithm.concat(11), "name": '+M7'};
-const aug7thChord        = {"halfStepAlgorithm": augTriadChord.halfStepAlgorithm.concat(10), "name": '+7'};
-
-const allChordTypes = [
-                       majorTriadChord, 
-                       minorTriadChord, 
-                       augTriadChord, 
-                       dimTriadChord, 
-                       dominant7thChord, 
-                       major7thChord,
-                       minor7thChord,
-                       halfDim7thChord,
-                       dim7thChord,
-                       minor7thChord,
-                       augMajor7thChord,
-                       aug7thChord
-                      ]
 
 function chordTypesToPick() {
   let validChordsToPick = [];

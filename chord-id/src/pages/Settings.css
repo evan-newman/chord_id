@@ -6,6 +6,7 @@
 }
 
 .checkbox-group {
+    display: flex;
     margin: 10px;
 }
 
@@ -27,13 +28,14 @@
 
 .checkbox-group label:hover {
     background-color: #dfd;
+    cursor: pointer;
 }
 
 .checkbox-group input[type="checkbox"]:focus + label {
     border: 2px dashed #444;
 }
 
-.checkbox-group input[type="checkbox"]:checked + label {
+.selectedBox input[type="checkbox"]:checked + label {
     background-color: #bfb;
     border-color: #4c4;
 }
