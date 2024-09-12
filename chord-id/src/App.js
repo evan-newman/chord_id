@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from "./pages/Home";
-import Settings from "./pages/Settings";
-import Play from "./pages/Play";
-import NotFound from "./pages/NotFound";
-import './App.css';
+import Home from "./components/Home";
+import Settings from "./components/Settings";
+import Play from "./components/Play";
+import NotFound from "./components/NotFound";
+import './styles/App.css';
 import data from "./chordData";
 
 function App() {

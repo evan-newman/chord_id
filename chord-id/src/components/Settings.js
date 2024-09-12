@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Settings.css";
+import "../styles/Settings.css";
 
 export default function Settings(props) {
     let { chordTypes, setChordTypes } = props;
