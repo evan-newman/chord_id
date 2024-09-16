@@ -15,9 +15,9 @@ function App() {
     <div className="App">
       <Router>
           <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/settings" element={<Settings chordTypes={chordTypes} setChordTypes={setChordTypes} />} />
-              <Route path="/play" element={<Play chordTypes={chordTypes} />} />
+              <Route path="/chord_id" element={<Home />} />
+              <Route path="/chord_id/settings" element={<Settings chordTypes={chordTypes} setChordTypes={setChordTypes} />} />
+              <Route path="/chord_id/play" element={<Play chordTypes={chordTypes} />} />
               <Route path="*" element={<NotFound />} />
           </Routes>
       </Router>

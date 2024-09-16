@@ -219,7 +219,7 @@ export default function Play(props) {
 
     return (
         <div onClick={handleActions}>
-            <Link to="/">
+            <Link to="/chord_id">
                 <button id="home-button">Back</button>
             </Link>
             <div className="play-page">

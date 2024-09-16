@@ -1,5 +1,5 @@
 {
-  "home": "https://evan-newman.github.io/chord_id",
+  "homepage": "https://evan-newma.github.io/chord_id",
   "name": "chord-id",
   "version": "0.1.0",
   "private": true,
@@ -7,13 +7,15 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "gh-pages": "^6.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
     "vexflow": "^4.2.5",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "predeploy": "npm run build",

@@ -47,7 +47,7 @@ export default function Settings(props) {
 
     return (
         <div>
-            <Link to="/">
+            <Link to="/chord_id">
                 <button id="back-button">Back</button>
             </Link>
             <div className="settings-page">

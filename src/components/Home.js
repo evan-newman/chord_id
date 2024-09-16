@@ -7,10 +7,10 @@ export default function Home() {
         <div className="intro-page">
             <h1 className="title-name">Chord Identifier</h1>
             <div className="buttons-container">
-                <Link to="/settings">
+                <Link to="/chord_id/settings">
                     <button className="intro-button">Settings</button>
                 </Link>
-                <Link to="/play">
+                <Link to="/chord_id/play">
                     <button className="intro-button">Start</button>
                 </Link>
             </div>
